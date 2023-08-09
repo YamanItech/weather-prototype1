@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>weather search</title>
+  <link rel="stylesheet" href="IshworAcharya_2357589.css">
+</head>
+<body>
+  <header class="container flex">
+    <div class="search">
+      <input type="text" placeholder="Serach for a city..."><span><button><img class="img-1" src="search.png" alt=""></img></button></span>
+       
+    </div>
+  </header>
+  <div class="middle container flex-m ">
+    <div><h1>Expected weather for <span id="place"></span></h1></div>
+    <div ><h1 id="date"></h1></div>
+
+  </div>
+  <section class="container">
+    <div class="box flex"> 
+      <div class="box1"><h1>High Temperature<img class="img" src="high-temp.png" alt=""></h1>
+      <p id="high-t" class="txt"></p>
+      </div>
+      <div class="box2">
+        <div><img id="icon" src="" alt=""></div>
+        <div><h1 id="des"></h1></div>  
+
+      </div>
+      <div class="box1">
+        <h1>Low Temperature<img class="img" src="low-temp.png" alt=""></h1>
+      <p id="low-t" class="txt"></p>
+      </div>
+    </div>
+  </section>
+  <section class="container main">
+    <div class="row flex">
+      <div class="col flex-c">
+        <div class="box3" >
+          <div><h1>Temperature<img class="img" src="temperature.png" alt=""></h1></div>
+          <p id="Temperature" class="txt"></p>
+        </div>
+        <div class="box3">
+          <div><h1>Wind<img class="img" src="wind.png" alt=""></h1></div>
+          <p id="Wind" class="txt"></p>
+        </div>
+      </div>
+      <div class="col flex-c">
+        <div class="box3">
+          <div><h1>Pressure<img class="img" src="pressure.png" alt=""></h1></div>
+          <p id="pressure" class="txt"></p>
+        </div>
+        <div class="box3">
+          <div><h1>Humidity<img class="img" src="Humidity.png" alt=""></h1></div>
+          <p id="Humidity" class="txt"></p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+ 
+<script src="script.js"></script>
+</body>
+</html>

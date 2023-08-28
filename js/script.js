@@ -35,20 +35,16 @@
        document.getElementById('des').innerHTML=data.weather[0].description;
        const weatherIcon = document.getElementById('icon');
        weatherIcon.src = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;// Sets the weather icon based on the fetched weather data.
-       fetch("./php/insert.php", {
+      fetch("./php/insert.php", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data) // Send the searched city to PHP
-      })
-      .then(response => response.text())
-      .then(responseText => {
-        console.log(responseText); // Log the response from PHP
-      })
-      .catch(error => {
-        console.error('Error sending data to PHP:', error);
-      });
+          body: JSON.stringify(data) 
+        }) 
+  document.querySelector(".historyButton").addEventListener("click", () => {
+    window.location.href = `history.html?city=${city}`;
+  });
       
       
      })
@@ -84,8 +80,3 @@
    const city = searchBox.value;
    weatherCheck(city);// Calls the 'weatherCheck' function when the button is clicked.
  });
- document.querySelector(".historyButton").addEventListener("click", () => {
-  const city = workingInCity.innerHTML;
-  window.location.href = `history.html?city=${encodeURIComponent(city)}`;
-});
-

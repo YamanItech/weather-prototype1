@@ -1,9 +1,10 @@
 <?php
     // Include connection
     include 'connection.php';
-    // Get data from POST
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        try {
+
+    try {
+        // Get data from POST
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $jsonData = file_get_contents("php://input");
             // If no JSON
             if ($jsonData === false) {
@@ -15,38 +16,32 @@
                 throw new Exception("Error decoding JSON data");
             }
             // SQL query
-            $sql = "INSERT INTO weather (
-                city, 
-                temperature,
-                weather_condition,
-                humidity,
-                pressure,
-                wind,
-                icon
-            ) VALUES (
-                '{$data['name']}',
-                '{$data['main']['temp']}',
-                '{$data['weather'][0]['description']}',
-                '{$data['main']['humidity']}',
-                '{$data['main']['pressure']}',
-                '{$data['wind']['speed']}',
-                '{$data['weather'][0]['icon']}'
-            )";            
-            if ($conn->query($sql) === TRUE) {
+            $date = date("Y-m-d");
+            $sql = "INSERT INTO weather(city, country, temperature, humidity, wind, pressure, weather_condition,
+                    date_accessed) VALUES (
+                    '{$data['name']}',
+                    '{$data['sys']['country']}',
+                    '{$data['main']['temp']}',
+                    '{$data['main']['humidity']}',
+                    '{$data['wind']['speed']}',
+                    '{$data['main']['pressure']}',
+                    '{$data['weather'][0]['description']}',
+                    '$date')";
+            if ($connect->query($sql) === TRUE) {
                 // If successful, send True
                 header('Content-Type: application/json');
                 echo json_encode(['success' => true, 'message' => 'Data processed successfully']);
             } else {
                 // If unsuccessful, send False
-                throw new Exception("Error inserting data: " . $conn->error);
+                throw new Exception("Error inserting data: " . $connect->error);
             }
-            $conn->close();
-        } catch (Exception $e) {
-            http_response_code(400);
-            echo json_encode(['success' => false, 'error' => $e->getMessage()]);
+            $connect->close();
+        } else {
+            http_response_code(405);
+            echo json_encode(['success' => false, 'error' => 'Only POST requests are allowed']);
         }
-    } else {
-        http_response_code(405);
-        echo json_encode(['success' => false, 'error' => 'Only POST requests are allowed']);
+    } catch (Exception $e) {
+        http_response_code(400);
+        echo json_encode(['success' => false, 'error' => $e->getMessage()]);
     }
 ?>
